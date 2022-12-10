@@ -8,7 +8,7 @@
 <script setup>
 import { ref } from 'vue';
 import { useTaskStore } from '../stores/task';
-import { supabase } from '../supabase';
+// import { supabase } from '../supabase';
 
 const taskStore = useTaskStore();
 

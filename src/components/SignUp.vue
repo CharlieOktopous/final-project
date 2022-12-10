@@ -62,7 +62,7 @@
 <script setup>
 import { ref, computed } from "vue";
 import PersonalRouter from "./PersonalRouter.vue";
-import { supabase } from "../supabase";
+// import { supabase } from "../supabase";
 import { useRouter } from "vue-router";
 import { useUserStore } from "../stores/user";
 import { storeToRefs } from "pinia";

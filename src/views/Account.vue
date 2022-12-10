@@ -5,7 +5,7 @@
 </template>
 
 <script setup>
-  import { supabase } from '../supabase'
+  // import { supabase } from '../supabase'
   import { onMounted, ref, toRefs } from 'vue'
   import { useUserStore } from "../stores/user";
   import Nav from '../components/Nav.vue';
@@ -28,15 +28,15 @@
   }
 
   async function signOut() {
-    try {
-      loading.value = true
-      let { error } = await supabase.auth.signOut()
-      if (error) throw error
-    } catch (error) {
-      alert(error.message)
-    } finally {
-      loading.value = false
-    }
+    // try {
+    //   loading.value = true
+    //   let { error } = await supabase.auth.signOut()
+    //   if (error) throw error
+    // } catch (error) {
+    //   alert(error.message)
+    // } finally {
+    //   loading.value = false
+    // }
   }
 </script>
 

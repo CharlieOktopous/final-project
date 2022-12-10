@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { supabase } from "../supabase";
+// import { supabase } from "../supabase";
 export const useUserStore = defineStore("user", {
   state: () => ({
     user: null,
@@ -7,7 +7,7 @@ export const useUserStore = defineStore("user", {
   }),
   actions: {
     async fetchUser() {
-      const user = await supabase.auth.user();
+      /* const user = await supabase.auth.user();
       if(user) {
         this.user = user;
         const { data: profile } = await supabase
@@ -18,11 +18,11 @@ export const useUserStore = defineStore("user", {
         if (profile) this.profile = profile[0];
         console.log('user in store: ', this.user);
         console.log('profile in store: ', this.profile);
-      }
+      } */
     },
 
     async signUp(email, password) {
-      const { user, error } = await supabase.auth.signUp({
+      /* const { user, error } = await supabase.auth.signUp({
         email: email,
         password: password,
       });
@@ -37,11 +37,11 @@ export const useUserStore = defineStore("user", {
             username: email
           }
         ])
-      }
+      } */
     },
 
     async signIn(email, password) {
-      const { user, error } = await supabase.auth.signIn({
+      /* const { user, error } = await supabase.auth.signIn({
         email: email,
         password: password,
       },
@@ -58,12 +58,12 @@ export const useUserStore = defineStore("user", {
 
         if (profile) this.profile = profile[0];
         console.log('profile in store: ', profile);
-      }
+      } */
     },
 
     async signOut(){
-      const { error } = await supabase.auth.signOut();
-      if (error) throw error;
+      /* const { error } = await supabase.auth.signOut();
+      if (error) throw error; */
     },
   },
 
