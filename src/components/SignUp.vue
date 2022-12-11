@@ -8,41 +8,40 @@
       </div>
     </div>
 
-    <form @submit.prevent="signUp" class="form-sign-in">
+    <form @submit.prevent="signUp" class="max-w-500 rounded-lg bg-white p-10 shadow-xl">
       <div class="form">
-        <div class="form-input">
-          <label class="input-field-label">E-mail</label>
+     
+          <label for="email" class="block text-sm font-medium leading-5 text-gray-700">Email:</label><br />
           <input
             type="email"
-            class="input-field"
+            class="form-input focus:shadow-outline-blue block w-full rounded-md rounded-md border border-gray-300 py-2 px-3 leading-5 shadow-sm transition duration-150 ease-in-out focus:border-blue-300 focus:outline-none sm:text-sm sm:leading-5" 
             placeholder="example@gmail.com"
             id="email"
             v-model="email"
             required
           />
-        </div>
-        <div class="form-input">
-          <label class="input-field-label">Password</label>
+   
+          <label class="block text-sm font-medium leading-5 text-gray-700">Password</label>
           <input
             type="password"
-            class="input-field"
+            class="form-input focus:shadow-outline-blue block w-full rounded-md rounded-md border border-gray-300 py-2 px-3 leading-5 shadow-sm transition duration-150 ease-in-out focus:border-blue-300 focus:outline-none sm:text-sm sm:leading-5" 
             placeholder="**********"
             id="password"
             v-model="password"
             required
           />
-        </div>
-        <div class="form-input">
-          <label class="input-field-label">Confirm password</label>
-          <input
+      
+
+          <label class="block text-sm font-medium leading-5 text-gray-700">Confirm password</label>
+          <input 
             type="password"
-            class="input-field"
+            class="form-input focus:shadow-outline-blue block w-full rounded-md rounded-md border border-gray-300 py-2 px-3 leading-5 shadow-sm transition duration-150 ease-in-out focus:border-blue-300 focus:outline-none sm:text-sm sm:leading-5"
             placeholder="**********"
             id="confirmPassword"
             v-model="confirmPassword"
             required
           />
-        </div>
+  
         <button class="button" type="submit">Sign Up</button>
         <p>
           Have an account?
