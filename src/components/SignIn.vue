@@ -31,7 +31,7 @@
       </div>
         <button class="focus:shadow-outline-indigo rounded-md bg-indigo-600 px-4 py-2 font-medium text-white hover:bg-indigo-500 focus:border-indigo-700 focus:outline-none active:bg-indigo-700" type="submit">Sign In</button>
         <p>
-          Have an account?
+          New member?
           <PersonalRouter
             :route="route"
             :buttonText="buttonText"
