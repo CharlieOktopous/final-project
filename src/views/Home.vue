@@ -8,25 +8,29 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref } from "vue";
 import { useTaskStore } from "../stores/task";
-import { useRouter } from 'vue-router';
-import Nav from '../components/Nav.vue';
-import NewTask from '../components/NewTask.vue';
-import TaskItem from '../components/TaskItem.vue';
+import { useRouter } from "vue-router";
+import Nav from "../components/Nav.vue";
+import NewTask from "../components/NewTask.vue";
+import TaskItem from "../components/TaskItem.vue";
 
 const taskStore = useTaskStore();
 
 // Variable para guardar las tareas de supabase
 const tasks = ref([]);
 
+const unsubscribe = taskStore.$onAction(async ({ name, after }) => {
+  after(() => {
+    if (name === "addTask" || name === "deleteTask") getTasks();
+  });
+});
 // Creamos una función que conecte a la store para conseguir las tareas de supabase
-const getTasks = async() => {
+const getTasks = async () => {
   tasks.value = await taskStore.fetchTasks();
 };
 
 getTasks();
-
 </script>
 
 <style></style>
