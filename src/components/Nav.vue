@@ -1,39 +1,46 @@
 <template>
-  <nav>
-    <!-- <PersonalRouter :route="route" :buttonText="buttonText" class="logo-link"/> -->
-    <router-link to="/">
-      Home
-    </router-link>
-
-    <ul>
-        <li>
-          <router-link to="/">Task Manager</router-link>
-        </li>
-
-        <li>
-          <router-link to="/account">Your Account</router-link>
-        </li>
-    </ul>
-
-    <div>
-      <ul>
-        <li class="log-out-welcome">
-          <p>Welcome, user</p>
-        </li>
-        <li>
-          <button @click="signOut" class="button">Log out</button>
-        </li>
-      </ul>
+  <nav
+    class="navbar px-16 w-full flex justify-between items-center bg-blue-500 text-white h-16"
+  >
+    <div class="flex gap-10">
+      <router-link to="/" class="router-link font-semibold">Task Manager</router-link>
+      <router-link to="/account" class="router-link font-semibold">Your Account</router-link>
     </div>
+    <div class="flex items-center gap-20">
+      <p class="flex gap-4" v-if="useUserStore().user">
+        <span> Welcome</span>
+        <span class="font-bold">{{ useUserStore().user.email }}</span>
+      </p>
+      <button @click="signOut" class="button-log-out">
+        <span class="mb-1">Logout</span>
+      </button>
+    </div>
+    <!-- Aplication hamburguer -->
+    <!-- <button @click="toggle" class="toggle"> </button>
+      <div v-show="changeBoolean" class="hamburger">
+        <ul>
+        <li>
+          <router-link to="/" class="router-link-mobile">Task Manager</router-link>
+        </li>
+
+        <li>
+          <router-link to="/account" class="router-link-mobile">Your Account</router-link>
+        </li>
+        <li>
+          <button @click="signOut" class="button-log-out-mobile">Log out</button>
+        </li>
+        </ul>
+      </div>
+   -->
   </nav>
 </template>
 
 <script setup>
 // import PersonalRouter from "./PersonalRouter.vue";
 import { useUserStore } from "../stores/user";
-import { computed } from "vue";
+import { computed, readonly } from "vue";
 import { useRouter } from "vue-router";
-import { ref } from 'vue';
+import { ref } from "vue";
 
 //constant to save a variable that will hold the use router method
 const route = "/";
@@ -50,32 +57,30 @@ const userEmail = getUser.email;
 const redirect = useRouter();
 
 const signOut = async () => {
-  try{
+  try {
+    await useUserStore().signOut();
+    redirect.push({ path: "/auth/login" });
     // call the user store and send the users info to backend to signOut
     // then redirect user to the homeView
-  } catch (error) {}
+  } catch (error) {
+    errorMsg.value = error.message;
+    setTimeout(() => {
+      errorMsg.value = null;
+    }, 5000);
+  }
+  return;
+  errorMsg.value = "error";
 };
 
+//Logica para el Hamburguer
+const changeBoolean = ref(false);
+const toggle = () => {
+  changeBoolean.value = !changeBoolean.value;
+};
 </script>
 
 <style>
-.navbar-img {
-  width: 90px;
-}
-
-nav {
-  background-color: lightgray;
-  display: flex;
-  width: 100%;
-  justify-content: space-around;
-  align-items: center;
-}
-
-nav ul {
-  list-style: none;
-  padding-inline-start: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+/* .navbar-img {
+  width: 190px;
+} */
 </style>

@@ -22,3 +22,18 @@
 /* Home view */
 
 /* Account View */
+.navbar{
+    background-color:#FFB243;
+}
+body{
+    background-color: #f9f9f9;
+}
+.button-log-out{
+    padding: .3rem 2rem;
+    border-radius: 22px;
+    border: 1px solid #599A8E;
+    background-color: #9BAC7F;
+}
+.button-log-out:hover{
+    background-color: #599A8E;
+}
