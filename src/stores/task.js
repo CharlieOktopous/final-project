@@ -1,37 +1,37 @@
 import { defineStore } from "pinia";
-// import { supabase } from "../supabase";
+import { supabase } from "../supabase";
 import { useUserStore } from "./user";
 
-export const useTaskStore = defineStore("tasks", {
+export const useTaskStore = defineStore("todos", {
   state: () => ({
-    tasks: null,
+    todos: null,
   }),
   actions: {
     async fetchTasks() {
-      // const { data: tasks } = await supabase
-      //   .from("tasks")
-      //   .select("*")
-      //   .order("id", { ascending: false });
-      // this.tasks = tasks;
-      // return this.tasks;
+      const { data: todos } = await supabase
+        .from("todos")
+        .select("*")
+        .order("id", { ascending: false });
+      this.todos = todos;
+      return this.todos;
     },
     
     async addTask(title, description) {
-      // console.log(useUserStore().user.id);
-      // const { data, error } = await supabase.from("tasks").insert([
-      //   {
-      //     user_id: useUserStore().user.id,
-      //     title: title,
-      //     is_complete: false,
-      //     description: description,
-      //   },
-      // ]);
+      console.log(useUserStore().user.id);
+      const { data, error } = await supabase.from("todos").insert([
+        {
+          user_id: useUserStore().user.id,
+          title: title,
+          is_complete: false,
+          description: description,
+        },
+      ]);
     },
 
     async deleteTask(id){
-      // const { data, error } = await supabase.from("tasks").delete().match({
-      //   id: id,
-      // });
+      const { data, error } = await supabase.from("todos").delete().match({
+        id: id,
+      });
     }
   }
 });
