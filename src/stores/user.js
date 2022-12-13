@@ -13,7 +13,7 @@ export const useUserStore = defineStore("user", {
         const { data: profile } = await supabase
         .from('profiles')
         .select()
-        .match({ user_id: this.user.id })
+        .match({ id: this.user.id })
 
         if (profile) this.profile = profile[0];
         console.log('user in store: ', this.user);
@@ -54,7 +54,7 @@ export const useUserStore = defineStore("user", {
         const { data: profile } = await supabase
         .from('profiles')
         .select()
-        .match({ user_id: this.user.id })
+        .match({ id: this.user.id })
 
         if (profile) this.profile = profile[0];
         console.log('profile in store: ', profile);
