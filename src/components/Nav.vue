@@ -11,7 +11,7 @@
         <span> Welcome</span>
         <span class="font-bold">{{ useUserStore().user.email }}</span>
       </p>
-      <button @click="signOut" class="button-log-out">
+      <button @click="signOut" class="button button-log-out">
         <span class="mb-1">Logout</span>
       </button>
     </div>
