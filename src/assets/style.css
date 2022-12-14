@@ -100,6 +100,14 @@ textarea {
   padding: 3px;
 }
 
+.card{
+  border-radius: 8px;
+  box-shadow: 0px 4px 24px rgba(24, 41, 47, 0.1);
+  border: 2px solid #d9d7d7;
+  max-width: 80%;
+  width:350px;
+}
+
 @media (min-width: 768px) {
   .burger-menu {
     display: none;

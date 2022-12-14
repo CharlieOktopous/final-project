@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-sm rounded overflow-hidden shadow-lg">
+  <div class="card rounded overflow-hidden flex flex-col">
     <div class="px-6 py-4">
       <h3 class="font-bold text-xl mb-2">{{ task.title }}</h3>
       <p class="text-gray-700 text-base">

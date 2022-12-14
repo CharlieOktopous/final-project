@@ -3,7 +3,10 @@
     <Nav />
     <NewTask />
     <h1>Tasks:</h1>
-    <TaskItem v-for="task in tasks" :key="task.id" :task="task" />
+    <div class="flex gap-4 flex-row flex-wrap justify-center py-8">
+
+      <TaskItem v-for="task in tasks" :key="task.id" :task="task" />
+    </div>
   </div>
 </template>
 
