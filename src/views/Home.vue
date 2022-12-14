@@ -1,11 +1,19 @@
 <template>
   <div class="wrapper">
     <Nav />
-    <NewTask />
-    <h1>Tasks:</h1>
-    <div class="flex gap-4 flex-row flex-wrap justify-center py-8">
-
-      <TaskItem v-for="task in tasks" :key="task.id" :task="task" />
+    <div class="w-full flex flex-col gap-4">
+      <NewTask />
+      <hr class="border-t-2" />
+      <h1 class="tasks-title text-center text-lg" v-if="tasks.length > 0">
+        Tasks:
+      </h1>
+      <div class="no-tasks-message" v-if="tasks.length === 0">
+        <span class="text-lg">There are no tasks yet</span>
+        <span class="font-bold text-lg">¡Create a task now!</span>
+      </div>
+      <div class="flex gap-4 flex-row flex-wrap justify-center py-8">
+        <TaskItem v-for="task in tasks" :key="task.id" :task="task" />
+      </div>
     </div>
   </div>
 </template>
