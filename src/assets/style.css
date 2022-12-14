@@ -1,9 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-html,body{
-    height: 100%;
-    width: 100%;
+html,
+body {
+  height: 100%;
+  width: 100%;
 }
 /* :root {
     --colorWhite: #ffffff;
@@ -26,42 +27,85 @@ html,body{
 /* Home view */
 
 /* Account View */
-.navbar{
-    background-color:#FFB243;
+.navbar {
+  background-color: #ffb243;
 }
-body{
-    background-color: #f9f9f9;
+body {
+  background-color: #f9f9f9;
 }
-.button{
-    padding: .3rem 2rem;
-    border-radius: 22px;
-    border: 1px solid #599A8E;
-    background-color: #9BAC7F;
-    color: white;
+.button {
+  padding: 0.3rem 2rem;
+  border-radius: 22px;
+  border: 1px solid #599a8e;
+  background-color: #9bac7f;
+  color: white;
 }
-.button:hover{
-    background-color: #599A8E;
+.button:hover {
+  background-color: #599a8e;
 }
-.add-task-button{
-    background-color: #9bac7f98;
+.add-task-button {
+  background-color: #9bac7f98;
+}
+.add-task-title {
+  font-size: 1.4rem;
+  color: #131d3b;
+}
+.input-field .input {
+  padding: 0 1rem;
+  border-radius: 8px;
+  box-shadow: 0px 4px 24px rgba(24, 41, 47, 0.1);
+}
+.input-field .input:focus {
+  outline: 2px solid #599a8e;
+}
+textarea {
+  min-height: 24px;
+  max-height: 100px;
+}
+.midnight-blue {
+  color: #131d3b;
+}
+.mobile-navbar {
+  position: absolute;
+  top: 30px;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  padding-bottom:1rem ;
+  background-color: #ffb243;
+}
+.mobile-link a {
+  color: whitesmoke;
+  text-decoration: none;
+  font-size: 16px;
+  line-height: 18px;
+  font-weight: 500;
+}
 
+.mobile-logout button{
+  color: #131d3b;
 }
-.add-task-title{
-    font-size: 1.4rem;
-    color: #131D3B;
+/* SignIn Component */
+
+.desktop-menu {
+  display: none;
 }
-.input-field .input{
-    padding: 0 1rem;
-    border-radius: 8px;
-    box-shadow: 0px 4px 24px rgba(24, 41, 47, 0.1);
+.burger-menu {
+  display: flex;
+  align-items: center;
+  padding: 3px;
 }
-.input-field .input:focus{
-    outline: 2px solid #599A8E;
-}
-textarea{
-    min-height: 24px;
-    max-height: 100px;
-}
-.mindnight-blue{
-    color: #131D3B;
+
+@media (min-width: 768px) {
+  .burger-menu {
+    display: none;
+  }
+
+  .desktop-menu {
+    display: flex;
+  }
 }
