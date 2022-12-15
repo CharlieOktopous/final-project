@@ -46,7 +46,6 @@ const errorMessage = ref(null);
 // Arrow function para crear tareas.
 const addTask = () => {
   if (
-    name.value.length === 0 ||
     name.value.length <= 3 ||
     description.value.length === 0
   ) {

@@ -1,5 +1,27 @@
 <template>
-  <div :class="{'task-completed' : isComplete}" class="card rounded overflow-hidden flex flex-col">
+  <div
+    :class="{ 'task-completed': isComplete }"
+    class="card rounded overflow-hidden flex flex-col"
+  >
+    <div v-if="showErrorMessage">
+      <p class="error-text">{{ errorMessage }}</p>
+    </div>
+    <div v-show="editTask" class="edit-task">
+      <input
+        class="input-edit"
+        type="text"
+        placeholder="Edit Title"
+        v-model="title"
+      />
+      <input
+        class="input-edit"
+        type="text"
+        placeholder="Edit Description"
+        v-model="description"
+      />
+
+      <button @click="changeTask" class="button-change">Change</button>
+    </div>
     <div class="px-6 py-4">
       <h3 class="font-bold text-xl mb-2">{{ task.title }}</h3>
       <p class="text-gray-700 text-base">
@@ -25,7 +47,7 @@
           <line x1="14" y1="11" x2="14" y2="17" />
         </svg>
       </button>
-      <button @click="deleteTask">
+      <button @click="editTaskFunction">
         <svg
           class="h-8 w-8 midnight-blue"
           width="24"
@@ -77,21 +99,45 @@ import { ref } from "vue";
 import { useTaskStore } from "../stores/task";
 // import { supabase } from '../supabase';
 
-
 const taskStore = useTaskStore();
+const showErrorMessage = ref(false);
+const errorMessage = ref(null);
 
 const props = defineProps({
   task: Object,
 });
 
 const isComplete = ref(props.task.is_complete);
-console.log("is_complete",isComplete);
+console.log("is_complete", isComplete);
 
 const toggleTaskDone = async () => {
   taskStore.toggleTaskDone(props.task.id);
-  isComplete.value = !isComplete.value
+  isComplete.value = !isComplete.value;
 };
 
+const editTask = ref(false);
+const editTaskFunction = () => {
+  editTask.value = !editTask.value;
+};
+
+const title = ref();
+const description = ref();
+const changeTask = async () => {
+  if (title.value.length <= 3 || description.value.length === 0) {
+    // Primero comprobamos que ningún campo del input esté vacío y lanzamos el error con un timeout para informar al user.
+    showErrorMessage.value = true;
+    errorMessage.value = "The task title or description is too short";
+    setTimeout(() => {
+      showErrorMessage.value = false;
+    }, 5000);
+    return;
+  }
+  editTaskFunction();
+  await taskStore.editTask(props.task.id, {
+    title: title.value,
+    description: description.value,
+  });
+};
 // Función para borrar la tarea a través de la store. El problema que tendremos aquí (y en NewTask.vue) es que cuando modifiquemos la base de datos los cambios no se verán reflejados en el v-for de Home.vue porque no estamos modificando la variable tasks guardada en Home. Usad el emit para cambiar esto y evitar ningún page refresh.
 const deleteTask = async () => {
   await taskStore.deleteTask(props.task.id);

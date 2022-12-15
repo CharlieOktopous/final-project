@@ -31,8 +31,9 @@ const taskStore = useTaskStore();
 const tasks = ref([]);
 
 const unsubscribe = taskStore.$onAction(async ({ name, after }) => {
+  const actions = ["addTask", "deleteTask", "editTask"];
   after(() => {
-    if (name === "addTask" || name === "deleteTask") getTasks();
+    if (actions.includes(name)) getTasks();
   });
 });
 // Creamos una función que conecte a la store para conseguir las tareas de supabase

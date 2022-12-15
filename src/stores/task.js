@@ -7,6 +7,12 @@ export const useTaskStore = defineStore("todos", {
     todos: null,
   }),
   actions: {
+    async getTaskById(id) {
+      const taskData = await supabase.from("todos").select("*").eq("id", id);
+      const task = taskData.data[0];
+      return task;
+    },
+
     async fetchTasks() {
       const { data: todos } = await supabase
         .from("todos")
@@ -34,9 +40,17 @@ export const useTaskStore = defineStore("todos", {
       });
     },
 
+    async editTask(id, formData) {
+      const task = this.getTaskById(id);  
+      console.log("formData",{...formData})
+      const { data, error } = await supabase
+        .from("todos")
+        .update({ ...formData })
+        .eq("id", id);
+    },
+
     async toggleTaskDone(id) {
-      const taskData = await supabase.from("todos").select("*").eq("id", id);
-      const task = taskData.data[0]
+      const task = this.getTaskById(id);
       const { data, error } = await supabase
         .from("todos")
         .update({ is_complete: !task.is_complete })

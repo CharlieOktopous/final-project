@@ -121,6 +121,10 @@ textarea {
   border: 2px solid greenyellow;
 }
 
+.error-text{
+  color: rgb(246, 62, 62);
+}
+
 @media (min-width: 768px) {
   .burger-menu {
     display: none;
