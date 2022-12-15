@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar w-full">
     <div
-      class="desktop-menu px-16 w-full flex justify-between items-center text-white h-16"
+      class="desktop-menu w-full flex justify-between items-center text-white h-16"
     >
       <div class="flex gap-10">
         <router-link to="/" class="router-link font-semibold"
