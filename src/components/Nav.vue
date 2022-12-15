@@ -54,23 +54,6 @@
         </div>
       </div>
     </div>
-    <!-- Aplication hamburguer -->
-    <!-- <button @click="toggle" class="toggle"> </button>
-      <div v-show="changeBoolean" class="hamburger">
-        <ul>
-        <li>
-          <router-link to="/" class="router-link-mobile">Task Manager</router-link>
-        </li>
-
-        <li>
-          <router-link to="/account" class="router-link-mobile">Your Account</router-link>
-        </li>
-        <li>
-          <button @click="signOut" class="button-log-out-mobile">Log out</button>
-        </li>
-        </ul>
-      </div>
-   -->
   </nav>
 </template>
 
