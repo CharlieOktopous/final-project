@@ -1,12 +1,12 @@
 <template>
-  <div class="card rounded overflow-hidden flex flex-col">
+  <div :class="{'task-completed' : isComplete}" class="card rounded overflow-hidden flex flex-col">
     <div class="px-6 py-4">
       <h3 class="font-bold text-xl mb-2">{{ task.title }}</h3>
       <p class="text-gray-700 text-base">
         {{ task.description }}
       </p>
     </div>
-    <div class="px-6 pt-4 pb-2">
+    <div class="flex justify-around px-6 pt-4 pb-2">
       <button @click="deleteTask">
         <svg
           class="h-8 w-8 midnight-blue"
@@ -43,6 +43,7 @@
       </button>
       <button @click="toggleTaskDone">
         <svg
+          v-show="isComplete"
           class="h-8 w-8 midnight-blue"
           viewBox="0 0 24 24"
           fill="none"
@@ -54,6 +55,18 @@
           <polyline points="9 11 12 14 22 4" />
           <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
         </svg>
+        <svg
+          v-show="!isComplete"
+          class="h-8 w-8 midnight-blue"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+        </svg>
       </button>
     </div>
   </div>
@@ -64,14 +77,19 @@ import { ref } from "vue";
 import { useTaskStore } from "../stores/task";
 // import { supabase } from '../supabase';
 
+
 const taskStore = useTaskStore();
 
 const props = defineProps({
   task: Object,
 });
 
+const isComplete = ref(props.task.is_complete);
+console.log("is_complete",isComplete);
+
 const toggleTaskDone = async () => {
-  //Call taskstore for toggle
+  taskStore.toggleTaskDone(props.task.id);
+  isComplete.value = !isComplete.value
 };
 
 // Función para borrar la tarea a través de la store. El problema que tendremos aquí (y en NewTask.vue) es que cuando modifiquemos la base de datos los cambios no se verán reflejados en el v-for de Home.vue porque no estamos modificando la variable tasks guardada en Home. Usad el emit para cambiar esto y evitar ningún page refresh.

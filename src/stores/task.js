@@ -15,7 +15,7 @@ export const useTaskStore = defineStore("todos", {
       this.todos = todos;
       return this.todos;
     },
-    
+
     async addTask(title, description) {
       console.log(useUserStore().user.id);
       const { data, error } = await supabase.from("todos").insert([
@@ -28,10 +28,21 @@ export const useTaskStore = defineStore("todos", {
       ]);
     },
 
-    async deleteTask(id){
+    async deleteTask(id) {
       const { data, error } = await supabase.from("todos").delete().match({
         id: id,
       });
-    }
-  }
+    },
+
+    async toggleTaskDone(id) {
+      const taskData = await supabase.from("todos").select("*").eq("id", id);
+      const task = taskData.data[0]
+      const { data, error } = await supabase
+        .from("todos")
+        .update({ is_complete: !task.is_complete })
+        .match({
+          id: id,
+        });
+    },
+  },
 });
