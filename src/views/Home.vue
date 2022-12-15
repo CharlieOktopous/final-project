@@ -11,7 +11,7 @@
         <span class="text-lg">There are no tasks yet</span>
         <span class="font-bold text-lg">¡Create a task now!</span>
       </div>
-      <div class="flex gap-4 flex-row flex-wrap justify-center py-8">
+      <div class="flex items-baseline gap-4 flex-row flex-wrap justify-center py-8">
         <TaskItem v-for="task in tasks" :key="task.id" :task="task" />
       </div>
     </div>

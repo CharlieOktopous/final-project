@@ -3,25 +3,6 @@
     :class="{ 'task-completed': isComplete }"
     class="card rounded overflow-hidden flex flex-col"
   >
-    <div v-if="showErrorMessage">
-      <p class="error-text">{{ errorMessage }}</p>
-    </div>
-    <div v-show="editTask" class="edit-task">
-      <input
-        class="input-edit"
-        type="text"
-        placeholder="Edit Title"
-        v-model="title"
-      />
-      <input
-        class="input-edit"
-        type="text"
-        placeholder="Edit Description"
-        v-model="description"
-      />
-
-      <button @click="changeTask" class="button-change">Change</button>
-    </div>
     <div class="px-6 py-4">
       <h3 class="font-bold text-xl mb-2">{{ task.title }}</h3>
       <p class="text-gray-700 text-base">
@@ -89,6 +70,34 @@
         >
           <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
         </svg>
+      </button>
+    </div>
+    <div class="px-8" v-if="showErrorMessage">
+      <p class="error-text">{{ errorMessage }}</p>
+    </div>
+    <div v-show="editTask" class="flex flex-col gap-4 p-8">
+      <div class="input-field">
+        <input
+          class="input-edit input w-full"
+          type="text"
+          placeholder="Edit Title"
+          v-model="title"
+        />
+      </div>
+      <div class="input-field">
+        <textarea
+          class="input-edit input w-full"
+          type="text"
+          placeholder="Edit Description"
+          v-model="description"
+        />
+      </div>
+
+      <button
+        @click="changeTask"
+        class="button-change button font-bold add-task-button"
+      >
+        Change
       </button>
     </div>
   </div>
