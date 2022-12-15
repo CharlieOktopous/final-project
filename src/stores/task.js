@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { supabase } from "../supabase";
 import { useUserStore } from "./user";
 
+//Manage all the functions for the todos
 export const useTaskStore = defineStore("todos", {
   state: () => ({
     todos: null,
@@ -13,6 +14,7 @@ export const useTaskStore = defineStore("todos", {
       return task;
     },
 
+    //Get all todos
     async fetchTasks() {
       const { data: todos } = await supabase
         .from("todos")
@@ -22,6 +24,7 @@ export const useTaskStore = defineStore("todos", {
       return this.todos;
     },
 
+    //Add a new task
     async addTask(title, description) {
       console.log(useUserStore().user.id);
       const { data, error } = await supabase.from("todos").insert([
@@ -34,12 +37,14 @@ export const useTaskStore = defineStore("todos", {
       ]);
     },
 
+    //Delete an existing task
     async deleteTask(id) {
       const { data, error } = await supabase.from("todos").delete().match({
         id: id,
       });
     },
 
+    //Edit an existing task
     async editTask(id, formData) {
       const task = this.getTaskById(id);  
       console.log("formData",{...formData})
@@ -49,6 +54,7 @@ export const useTaskStore = defineStore("todos", {
         .eq("id", id);
     },
 
+    //Mark a task as complete or incomplete
     async toggleTaskDone(id) {
       const task = this.getTaskById(id);
       const { data, error } = await supabase

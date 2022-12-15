@@ -30,6 +30,7 @@ const taskStore = useTaskStore();
 // Variable para guardar las tareas de supabase
 const tasks = ref([]);
 
+//Listen to changes on tasks (add, delete, edit) from pinia
 const unsubscribe = taskStore.$onAction(async ({ name, after }) => {
   const actions = ["addTask", "deleteTask", "editTask"];
   after(() => {
